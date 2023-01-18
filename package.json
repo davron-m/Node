@@ -1,0 +1,15 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dv_proger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dv_index.js"
+  },
+  "author": "Dav Ron",
+  "license": "ISC",
+  "dependencies": {
+    "currency-converter-lt": "^2.0.0-beta.0"
+  }
+}
