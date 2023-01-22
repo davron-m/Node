@@ -2,6 +2,8 @@ const CC = require('currency-converter-lt')
 
 const fs = require('fs')
 
+const http = require('http')
+
 let currencyConverter = new CC({from:"USD", to:"EUR", amount:100})
 
 currencyConverter.convert().then((response) => {
@@ -51,4 +53,29 @@ fs.unlink('./text-files/some.txt', () => {
     fs.rmdir('./text-files', () => { })
 })
 
+// Создания сервера
+
+/*let server = http.createServer((req, res) => {
+    res.writeHead(200, {'Contet-Type': 'text/html:charset=utf-8'})
+    const stream = fs.createReadStream('./templates/index.html')
+    stream.pipe(res)
+})  */
+
+let server = http.createServer((req, res) => {
+    res.writeHead(200, {'Contet-Type': 'text/html:charset=utf-8'})
+
+    if (req.url == '/')
+        fs.createReadStream('./templates/index.html').pipe(res)
+    else if (req.url == '/about')
+        fs.createReadStream('./templates/about.html').pipe(res)   
+    else 
+        fs.createReadStream('./templates/error.html').pipe(res)
+})
+
+const PORT = 3000
+const HOST = 'localhost'   //or 127.0.0.1
+
+server.listen(PORT, HOST, () => {
+    console.log(`Сервер запущен: http://${HOST}:${PORT}`)
+})
 
